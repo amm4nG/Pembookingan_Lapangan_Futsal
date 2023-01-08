@@ -81,7 +81,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
@@ -154,19 +154,12 @@
         <section class="content">
             <div class="container-fluid">
                 <!-- Info boxes -->
-                <div class="row">
+                <div class="row justify-content-center">
                     @forelse ($bookingan as $b)
-                        <div class="col-md-4 my-3">
+                        <div class="col-md-4 my-3 text-center">
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Bookingan Saya</h3>
-
-                                    <div class="card-tools">
-                                        <button class="btn btn-tool" data-card-widget="collapse" type="button"><i
-                                                class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <!-- /.card-tools -->
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">

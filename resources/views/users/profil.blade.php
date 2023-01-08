@@ -81,7 +81,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
@@ -179,14 +179,32 @@
                                         <b>Email</b> <a class="float-right">{{ Auth::user()->email }}</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Telp</b> <a class="float-right">- - -</a>
+                                        <b>Telp</b> <a class="float-right">
+                                            @if (Auth::user()->no_hp == null)
+                                                - - -
+                                            @else
+                                                {{ Auth::user()->no_hp }}
+                                            @endif
+                                        </a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Alamat</b> <a class="float-right">- - -</a>
+                                        <b>Alamat</b> <a class="float-right">
+                                            @if (Auth::user()->alamat == null)
+                                                - - -
+                                            @else
+                                                {{ Auth::user()->alamat }}
+                                            @endif
+                                        </a>
                                     </li>
                                 </ul>
-                                <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#lengkapi-profil"
-                                    href="#"><b>Lengkapi profile</b></a>
+                                @if (Auth::user()->no_hp == null && Auth::user()->alamat == null)
+                                    <a class="btn btn-primary btn-block" data-toggle="modal"
+                                        data-target="#lengkapi-profil" href="#"><b>Lengkapi profile</b></a>
+                                @else
+                                    <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#edit-profil"
+                                        href="#"><b>Edit profile</b></a>
+                                @endif
+
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -198,6 +216,40 @@
     </div>
 
     <!-- Modal -->
+    <div class="modal fade" id="edit-profil" aria-labelledby="exampleModalLabel" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-pencil-alt mr-1"></i> Edit Profil
+                    </h5>
+                    <button class="close" data-dismiss="modal" type="button" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('profil.update', Auth::user()->id) }}" method="post">
+                    @csrf
+                    @method('put')
+                    <div class="modal-body">
+                        <label for="">Username</label>
+                        <input class="form-control mb-2" id="username" value="{{ Auth::user()->username }}"
+                            name="username" type="text" required>
+                        <label for="">Email</label>
+                        <input class="form-control mb-2" id="email" value="{{ Auth::user()->email }}"
+                            name="email" type="email" required>
+                        <label for="">Nomor Telepon</label>
+                        <input class="form-control mb-2" id="no-hp" value="{{ Auth::user()->no_hp }}"
+                            name="no_hp" type="number" maxlength="12" required>
+                        <label for="">Alamat</label>
+                        <textarea class="form-control" id="alamat" name="alamat" required cols="30" rows="2"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="lengkapi-profil" aria-labelledby="exampleModalLabel" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -208,23 +260,33 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="">
+                <form action="{{ route('profil.update', Auth::user()->id) }}" method="post">
+                    @csrf
+                    <input type="hidden" value="{{ Auth::user()->username }}" name="username" id="">
+                    <input type="hidden" value="{{ Auth::user()->email }}" name="email" id="">
+                    @method('put')
+                    <div class="modal-body">
                         <label for="">Nomor Telepon</label>
-                        <input class="form-control" id="no-hp" name="no_hp" type="text">
+                        <input class="form-control mb-2" id="no-hp" placeholder="08xxxxxxxxxx" name="no_hp"
+                            type="number" maxlength="12" required>
                         <label for="">Alamat</label>
-                        <textarea class="form-control" id="" name="alamat" cols="30" rows="2"></textarea>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-                    <button class="btn btn-primary" type="button">Save</button>
-                </div>
+                        <textarea class="form-control" id="" name="alamat" required cols="30" rows="2"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
+    <script>
+        $('#edit-profil').on('shown.bs.modal', function() {
+            document.getElementById('alamat').value = "{{ Auth::user()->alamat }}"
+        })
+    </script>
     <script>
         $('#lengkapi-profil').on('shown.bs.modal', function() {
             $('#no-hp').focus()
