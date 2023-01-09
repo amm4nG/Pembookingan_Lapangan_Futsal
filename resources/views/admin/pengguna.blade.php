@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Beranda
+    Pengguna
 @endsection
 @section('class-body')
     hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed
@@ -168,7 +168,7 @@
                                             <th>No</th>
                                             <th>Username</th>
                                             <th>Email</th>
-                                            <th>Telp</th>
+                                            <th>Verifikasi</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -180,7 +180,7 @@
                                                     {{ $user->username }}
                                                 </td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>{{ $user->no_hp }}</td>
+                                                <td>{{ $user->email_verified_at }}</td>
                                                 <td align="center">
                                                     <span class="badge bg-danger mr-1"><a href=""
                                                             data-toggle="modal"

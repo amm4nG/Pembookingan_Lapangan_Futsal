@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Beranda
+    Setelan
 @endsection
 @section('class-body')
     hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed
@@ -158,7 +158,7 @@
             <div class="container-fluid">
                 <!-- Info boxes -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-8">
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -194,11 +194,23 @@
                         </div>
                         <!-- /.card -->
                     </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="{{ route('reset.update', Auth::user()->id) }}" method="post">
+                                    @csrf
+                                    @method('put')
+                                    <label for="">New Password</label>
+                                    <input type="text" name="password" id="" class="form-control" required>
+                                    <label for="" class="mt-2">Confirm Password</label>
+                                    <input type="password" name="password-confirm" id=""
+                                        class="form-control mb-2" required>
+                                    <button class="btn btn-danger" type="submit">Simpan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="row">
-                </div>
-                <!-- /.row -->
             </div>
         </section>
     </div>

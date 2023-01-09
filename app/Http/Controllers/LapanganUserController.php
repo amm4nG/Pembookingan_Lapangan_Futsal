@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookingan;
-use GuzzleHttp\Psr7\Request as Psr7Request;
+use App\Models\Bookingan; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LapanganUserController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
+    
     public function index(Request $request)
     {
         $bookingan = Bookingan::where('id_user', Auth::user()->id)->first();

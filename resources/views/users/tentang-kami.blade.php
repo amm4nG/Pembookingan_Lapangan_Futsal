@@ -81,7 +81,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
@@ -232,6 +232,21 @@
                     @if (Auth::user()->role == 'admin')
                     @else
                         <div class="col-md-12 mb-4">
+                            <div class="alert alert-success alert-dismissible fade show" id="info-success"
+                                style="display: none" role="alert">
+                                Terima kasih, komentar Anda telah terkirim.
+                                <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="alert alert-warning alert-dismissible fade show" id="info-warning"
+                                style="display: none" role="alert">
+                                Harap isi kolom komentar!
+                                <button type="button" class="close text-primary" data-dismiss="alert"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Hubungi Kami</h3>
@@ -244,26 +259,57 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="inputDescription">Pesan</label>
-                                        <textarea class="form-control" id="inputDescription" rows="4"></textarea>
+                                        <label for="inputDescription">Komentar</label>
+                                        <textarea required class="form-control" name="komentar" id="komentar" rows="4"></textarea>
                                     </div>
-                                    <div class="btn btn-primary btn-lg btn-flat">
-                                        <i class="icon fas fa-send"></i> Kirim
-                                    </div>
+                                    <button id="kirim" class="btn btn-primary btn-lg btn-flat">
+                                        <i class="icon fas fa-send"></i> Kirim <div id="loading"
+                                            class="spinner-border spinner-border-sm ml-1 text-white" style="display: none"
+                                            role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </button>
                                     <a class="btn btn-success btn-lg btn-flat" href=""><i
                                             class="icon fab fa-whatsapp"></i>
                                         WhatsApp</a>
-
                                 </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
                         </div>
                     @endif
-
                 </div>
         </section>
     </div>
 @endsection
 @section('content')
+@endsection
+@section('scripts')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#kirim').on('click', function() {
+            var komentar = document.getElementById('komentar').value
+            var id_user = "{{ Auth::user()->id }}"
+            $('#loading').show()
+            $.ajax({
+                url: "{{ route('komentar.store') }}",
+                type: "post",
+                data: {
+                    komentar: komentar,
+                    id_user: id_user
+                },
+                success: function(response) {
+                    $('#loading').hide()
+                    $('#info-success').show()
+                    document.getElementById('komentar').value = ""
+                },
+                error: function() {
+                    $('#loading').hide()
+                    $('#info-warning').show()
+                }
+            })
+        })
+    </script>
 @endsection

@@ -3,7 +3,9 @@
 use App\Http\Controllers\BokinganSayaController;
 use App\Http\Controllers\CaraBookingUserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\LapanganUserController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PembookinganController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfilController;
@@ -35,16 +37,18 @@ Route::get('/', function () {
  
 
 Route::resource('home', HomeController::class)->middleware(['auth']);
+Route::resource('reset', PasswordController::class)->middleware(['auth', 'verified']);
 
-Route::group(['middleware' => ['role:user']], function () {
+Route::group(['middleware' => ['role:user', 'verified']], function () {
     Route::resource('lapangan', LapanganUserController::class);
     Route::resource('cara-booking', CaraBookingUserController::class);
     Route::resource('tentang-kami', TentangKamiUserController::class);
     Route::resource('profil', ProfilController::class);
     Route::resource('bookingan-saya', BokinganSayaController::class);
+    Route::resource('komentar', KomentarController::class);
 });
 
-Route::group(['middleware' => ['role:admin']], function () {
+Route::group(['middleware' => ['role:admin', 'verified']], function () {
     Route::resource('pembookingan', PembookinganController::class);
     Route::resource('pengguna', PenggunaController::class);
     Route::resource('setelan', SetelanController::class);
