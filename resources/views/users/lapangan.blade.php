@@ -282,7 +282,6 @@
         </section>
     </div>
     <!-- /.content -->
-
     <!-- modal validasi tanggal main -->
     <div class="modal" id="modal" tabindex="-1">
         <div class="modal-dialog">
@@ -294,9 +293,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="">
-                        Minimal tanggal main satu hari dari hari ini
-                    </p>
+                    Minimal tanggal main satu hari dari hari ini
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="close" data-dismiss="modal" type="button">Oke</button>
@@ -316,9 +313,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        Harap atur tanggal main
-                    </p>
+                    Harap atur tanggal main
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="close1" data-dismiss="modal" type="button">Oke</button>

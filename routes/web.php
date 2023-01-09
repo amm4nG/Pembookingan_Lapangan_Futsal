@@ -4,9 +4,11 @@ use App\Http\Controllers\BokinganSayaController;
 use App\Http\Controllers\CaraBookingUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LapanganUserController;
+use App\Http\Controllers\PembookinganController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\TentangKamiUserController;
-use App\Http\Controllers\TestingController;
+use App\Http\Controllers\SetelanController;
+use App\Http\Controllers\TentangKamiUserController; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,14 +27,14 @@ Route::get('forgot-password', function () {
     return view('forgot-password');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
     return view('index');
 });
  
 
-Route::resource('home', HomeController::class)->middleware('auth');
+Route::resource('home', HomeController::class)->middleware(['auth']);
 
 Route::group(['middleware' => ['role:user']], function () {
     Route::resource('lapangan', LapanganUserController::class);
@@ -43,4 +45,7 @@ Route::group(['middleware' => ['role:user']], function () {
 });
 
 Route::group(['middleware' => ['role:admin']], function () {
+    Route::resource('pembookingan', PembookinganController::class);
+    Route::resource('pengguna', PenggunaController::class);
+    Route::resource('setelan', SetelanController::class);
 });
