@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Beranda
+    Pembookingan
 @endsection
 @section('class-body')
     hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed

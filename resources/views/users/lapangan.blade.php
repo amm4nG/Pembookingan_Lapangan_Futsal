@@ -239,7 +239,7 @@
                                     </div>
                                     <div class="bg-gray py-2 px-3">
                                         <h2 class="mb-0">
-                                            Rp. 150,000/jam
+                                            Rp. {{ number_format($lapangan->harga, 0, ',', '.') }}/jam
                                         </h2>
                                     </div>
                                     <div class="mt-4">

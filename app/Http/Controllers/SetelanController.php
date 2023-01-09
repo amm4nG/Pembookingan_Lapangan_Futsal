@@ -11,4 +11,15 @@ class SetelanController extends Controller
         $lapangan = Lapangan::all();
         return view('admin.setelan', compact(['lapangan']));
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'harga' => 'required'
+        ]);
+        $lapangan = Lapangan::find($id);
+        $lapangan->harga = $request->harga;
+        $lapangan->update();
+        return back();
+    }
 }

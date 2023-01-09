@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookingan; 
+use App\Models\Bookingan;
+use App\Models\Lapangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LapanganUserController extends Controller
-{
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth', 'verified']);
-    // }
+{ 
     
     public function index(Request $request)
     {
+        $lapangan = Lapangan::where('id', 1)->first();
         $bookingan = Bookingan::where('id_user', Auth::user()->id)->first();
-        return view('users.lapangan', compact(['bookingan']));
+        return view('users.lapangan', compact(['bookingan', 'lapangan']));
     }
 
     public function store(Request $request)
