@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BookingEvent;
 use App\Models\Bookingan;
 use App\Models\Lapangan;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class LapanganUserController extends Controller
             return response()->json([
                 'status' => 'error',
             ]);
-        }
+        } 
+        event(new BookingEvent('ada bookingan baru'));
         $bookingan->tanggal_main = $request->tanggalMain;
         $bookingan->jam_main = $request->jamMain;
         $bookingan->id_user = Auth::user()->id;
@@ -61,5 +63,13 @@ class LapanganUserController extends Controller
                 'status' => 'Data Berhasil Dihapus'
             ]);
         } 
+    }
+
+    public function show($id)
+    {
+        $bookingan = Bookingan::where('id_user', $id)->first();
+        return response()->json([
+            'bookingan' => $bookingan
+        ]);
     }
 }

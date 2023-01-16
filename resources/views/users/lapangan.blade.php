@@ -285,7 +285,7 @@
     <!-- modal validasi tanggal main -->
     <div class="modal" id="modal" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-white">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-exclamation-triangle text-warning"></i> Perhatian</h5>
                     <button class="close" id="x" data-dismiss="modal" type="button" aria-label="Close">
@@ -305,7 +305,7 @@
     <!-- modal pengaturan tanggal main -->
     <div class="modal" id="modal1" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-white">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-exclamation-triangle text-warning"></i> Perhatian</h5>
                     <button class="close" id="x1" data-dismiss="modal" type="button" aria-label="Close">

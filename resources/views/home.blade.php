@@ -106,14 +106,6 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="nav-icon fas fa-file-alt"></i>
-                                <p>
-                                    Laporan
-                                </p>
-                            </a>
-                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('setelan.index') }}">
                                 <i class="nav-icon fa fa-cog"></i>

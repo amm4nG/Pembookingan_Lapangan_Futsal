@@ -225,7 +225,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Yakin menolak pembookingan ini ?
+                            Yakin menolak bookingan dari {{ $booking->username }} ?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
