@@ -1,14 +1,14 @@
 # Pembookingan Lapangan Futsal
 
-## Fitur
+## Fitur :
 
-### Login
+-   ### Login
 
-### Registrasi
+-   ### Registrasi
 
-### Forgot password
+-   ### Forgot password
 
-### Dilengkapi dengan verifikasi email
+-   ### Dilengkapi dengan verifikasi email
 
 ### Halaman Admin
 
@@ -23,6 +23,8 @@
 -   Lapangan
 -   Tentang Kami
 -   Bookingan Saya
+
+### Deskripsi
 
 -   Pembookingan lapangan oleh si user akan ditampilkan secara realtime pada halaman pembookingan admin(tanpa harus reload halaman)
 -   Perubahan status pembookingan secara realtime(tanpa harus reload halaman)
