@@ -43,7 +43,7 @@ Route::group(['middleware' => ['role:user', 'verified']], function () {
     Route::resource('lapangan', LapanganUserController::class);
     Route::resource('cara-booking', CaraBookingUserController::class);
     Route::resource('tentang-kami', TentangKamiUserController::class);
-    Route::resource('profil', ProfilController::class);
+    // Route::resource('profil', ProfilController::class);
     Route::resource('bookingan-saya', BokinganSayaController::class);
     Route::resource('komentar', KomentarController::class);
 });

@@ -59,7 +59,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ url('profil') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
@@ -115,14 +115,14 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ url('profil') }}">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 Profil
                             </p>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('bookingan-saya') }}">
                             <i class="nav-icon fa fa-calendar"></i>
@@ -160,8 +160,8 @@
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img my-3 img-fluid img-circle"
-                                        src="../../dist/img/pemilik.png" alt="User profile picture">
+                                    <img class="profile-user-img my-3 img-fluid img-circle" src="../../dist/img/pemilik.png"
+                                        alt="User profile picture">
                                 </div>
 
                                 <h3 class="profile-username text-center">FUTSAL</h3>

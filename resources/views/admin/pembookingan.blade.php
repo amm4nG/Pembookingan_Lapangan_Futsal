@@ -59,7 +59,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ route('profil.index') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
@@ -189,9 +189,9 @@
                                                                 Setujui
                                                             </a>
                                                         </span>
-                                                        <span class="badge bg-danger"><a href=""
+                                                        {{-- <span class="badge bg-danger"><a href=""
                                                                 data-toggle="modal"
-                                                                data-target="#tolak-{{ $booking->id }}">Tolak</a></span>
+                                                                data-target="#tolak-{{ $booking->id }}">Tolak</a></span> --}}
                                                     @else
                                                         <span class="badge bg-success mr-1">Disetujui</span>
                                                     @endif

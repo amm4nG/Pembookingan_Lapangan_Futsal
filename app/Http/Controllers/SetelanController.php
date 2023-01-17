@@ -17,8 +17,20 @@ class SetelanController extends Controller
         $request->validate([
             'harga' => 'required'
         ]);
+        
         $lapangan = Lapangan::find($id);
+        if($request->diskon != null){
+            $lapangan->diskon = $request->diskon;
+        }
         $lapangan->harga = $request->harga;
+        $lapangan->update();
+        return back();
+    }
+
+    public function show($id)
+    {
+        $lapangan = Lapangan::find($id); 
+        $lapangan->diskon = 0;
         $lapangan->update();
         return back();
     }

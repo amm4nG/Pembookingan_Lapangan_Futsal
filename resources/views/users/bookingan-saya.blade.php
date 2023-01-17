@@ -59,7 +59,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ url('profil') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
@@ -115,14 +115,14 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ url('profil') }}">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 Profil
                             </p>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ url('bookingan-saya') }}">
                             <i class="nav-icon fa fa-calendar"></i>
@@ -170,7 +170,7 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="table-bookingan-saya" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -187,9 +187,11 @@
                                                 <td>{{ $booking->jam_main }}</td>
                                                 <td align="center">
                                                     @if ($booking->status_booking == 'no')
-                                                        <span class="badge bg-warning mr-1">Menunggu persetujuan</span>
+                                                        <span class="badge bg-warning mr-1"
+                                                            id="menunggu-persetujuan">Menunggu
+                                                            persetujuan</span>
                                                     @else
-                                                        <span class="badge bg-success mr-1">Disetujui</span>
+                                                        <span class="badge bg-warning mr-1">Disetujui</span>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -209,7 +211,7 @@
 @section('scripts')
     <script>
         $(function() {
-            $("#example1").DataTable({
+            $("#table-bookingan-saya").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,

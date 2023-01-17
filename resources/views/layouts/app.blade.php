@@ -89,40 +89,40 @@
                 type: 'get',
                 data: {},
                 success: function(response) {
-                    var modal = ''
+                    // var modal = ''
                     $('#example1 tbody tr').remove()
                     var table = ''
                     table += "<tbody>"
                     var no = 0
                     for (const key in response.bookingan) {
-                        modal +=
-                            `<div class="modal fade" id="tolak-` + response.bookingan[key].id +
-                            `" tabindex="-1" aria-labelledby="exampleModalLabel"` +
-                            `aria-hidden="true">` +
-                            `<div class="modal-dialog">` +
-                            `<div class="modal-content">` +
-                            `<form action="{{ url('pembookingan') }}/` + response.bookingan[key].id +
-                            `"` +
-                            `method="post">` +
-                            `@csrf` +
-                            `@method('delete')` +
-                            `<div class="modal-header">` +
-                            `<h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>` +
-                            `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
-                            `<span aria-hidden="true">&times;</span>` +
-                            `</button>` +
-                            `</div>` +
-                            `<div class="modal-body">` +
-                            `Yakin menolak bookingan dari ` + response.bookingan[key].username + ` ?` +
-                            `</div>` +
-                            `<div class="modal-footer">` +
-                            `<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>` +
-                            `<button type="submit" class="btn btn-danger">Ya</button>` +
-                            `</div>` +
-                            `</form>` +
-                            `</div>` +
-                            `</div>` +
-                            `</div>`
+                        // modal +=
+                        //     `<div class="modal fade" id="tolak-` + response.bookingan[key].id +
+                        //     `" tabindex="-1" aria-labelledby="exampleModalLabel"` +
+                        //     `aria-hidden="true">` +
+                        //     `<div class="modal-dialog">` +
+                        //     `<div class="modal-content">` +
+                        //     `<form action="{{ url('pembookingan') }}/` + response.bookingan[key].id +
+                        //     `"` +
+                        //     `method="post">` +
+                        //     `@csrf` +
+                        //     `@method('delete')` +
+                        //     `<div class="modal-header">` +
+                        //     `<h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>` +
+                        //     `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
+                        //     `<span aria-hidden="true">&times;</span>` +
+                        //     `</button>` +
+                        //     `</div>` +
+                        //     `<div class="modal-body">` +
+                        //     `Yakin menolak bookingan dari ` + response.bookingan[key].username + ` ?` +
+                        //     `</div>` +
+                        //     `<div class="modal-footer">` +
+                        //     `<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>` +
+                        //     `<button type="submit" class="btn btn-danger">Ya</button>` +
+                        //     `</div>` +
+                        //     `</form>` +
+                        //     `</div>` +
+                        //     `</div>` +
+                        //     `</div>`
                         no += 1
                         if (response.bookingan[key].status_booking == 'no') {
                             table += "<tr><td>" + no + "</td>" +
@@ -133,8 +133,8 @@
                                 "<span class='badge bg-success mr-1'><a href='" +
                                 "{{ url('pembookingan') }}/" + response.bookingan[key]
                                 .id + "'>Setujui</a></span>" +
-                                "<span class='badge bg-danger mr-1'><a href='' data-toggle='modal' data-target='#tolak-" +
-                                response.bookingan[key].id + "'>Tolak</a></span>" +
+                                // "<span class='badge bg-danger mr-1'><a href='' data-toggle='modal' data-target='#tolak-" +
+                                // response.bookingan[key].id + "'>Tolak</a></span>" +
                                 "</td></tr>"
                         } else {
                             table += "<tr><td>" + no + "</td>" +

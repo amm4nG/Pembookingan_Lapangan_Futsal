@@ -13,7 +13,7 @@ class LapanganUserController extends Controller
     
     public function index(Request $request)
     {
-        $lapangan = Lapangan::where('id', 1)->first();
+        $lapangan = Lapangan::where('id', 2)->first();
         $bookingan = Bookingan::where('id_user', Auth::user()->id)->first();
         return view('users.lapangan', compact(['bookingan', 'lapangan']));
     }

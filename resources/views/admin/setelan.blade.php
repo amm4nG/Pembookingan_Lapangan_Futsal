@@ -59,7 +59,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ route('profil.index') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
@@ -175,7 +175,14 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    Rp. {{ number_format($l->harga, 0, ',', '.') }}/jam
+                                                    @if (optional($l)->diskon == null || optional($l)->diskon == '')
+                                                        Rp. {{ number_format($l->harga, 0, ',', '.') }}/jam
+                                                    @else
+                                                        Rp.<span style="text-decoration: line-through" class="mr-2">
+                                                            {{ number_format($l->harga, 0, ',', '.') }}
+                                                        </span>
+                                                        {{ number_format($l->harga - ($l->diskon / 100) * $l->harga, 0, ',', '.') }}/jam
+                                                    @endif
                                                 </td>
                                                 <td align="center">
                                                     <span class="badge bg-success mr-1"><a href=""
@@ -184,6 +191,16 @@
                                                     <span class="badge bg-warning mr-1"><a href=""
                                                             data-toggle="modal"
                                                             data-target="#edit-{{ $l->id }}">Edit</a></span>
+                                                    @if (optional($l)->diskon == null || optional($l)->diskon == '')
+                                                        <span class="badge bg-secondary mr-1"><a href=""
+                                                                data-toggle="modal"
+                                                                data-target="#promo-{{ $l->id }}">Create
+                                                                promo</a></span>
+                                                    @else
+                                                        <span class="badge bg-danger mr-1"><a
+                                                                href="{{ route('setelan.show', $l->id) }}">Hapus
+                                                                promo</a></span>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -250,6 +267,33 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- pop up untuk membuat promo/diskon -->
+        <div class="modal fade" id="promo-{{ $l->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('setelan.update', $l->id) }}" method="post">
+                        @csrf
+                        @method('put')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Buat promo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="harga" id="harga" value="{{ $l->harga }}">
+                            <input type="number" name="diskon" id="diskon" class="form-control"
+                                placeholder="Diskon" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Buat</button>
                         </div>
                     </form>
                 </div>

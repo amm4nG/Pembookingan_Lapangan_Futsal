@@ -59,7 +59,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ route('profil.index') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
