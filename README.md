@@ -1,23 +1,23 @@
-### Pembookingan Lapangan Futsal
+# Pembookingan Lapangan Futsal
 
 ## Fitur
 
-# Login
+### Login
 
-# Registrasi
+### Registrasi
 
-# Forgot password
+### Forgot password
 
-# Dilengkapi dengan verifikasi email
+### Dilengkapi dengan verifikasi email
 
-# Halaman Admin
+### Halaman Admin
 
 -   Home
 -   Pembookingan
 -   Pengguna
 -   Pengaturan
 
-# Halaman user
+### Halaman user
 
 -   Home
 -   Lapangan
@@ -28,7 +28,7 @@
 -   Perubahan status pembookingan secara realtime(tanpa harus reload halaman)
 -   Dilengkapi dengan fitur pembuatan diskon
 
-# Dibangun Dengan :
+### Dibangun Dengan :
 
 -   Laravel 9
 -   Admin LTE
