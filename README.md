@@ -2,35 +2,33 @@
 
 ## Fitur :
 
--   ### Login
+-   ### Login (Dilengkapi dengan verifikasi email)
 
--   ### Registrasi
+-   ### Registrasi (Dilengkapi dengan verifikasi email)
 
--   ### Forgot password
+-   ### Forgot password (Dilengkapi dengan verifikasi email)
 
--   ### Dilengkapi dengan verifikasi email
-
-### Halaman Admin
+-   ### Halaman Admin
 
 -   Home
 -   Pembookingan
 -   Pengguna
 -   Pengaturan
 
-### Halaman user
+-   ### Halaman user
 
 -   Home
 -   Lapangan
 -   Tentang Kami
 -   Bookingan Saya
 
-### Deskripsi
+-   ### Deskripsi
 
 -   Pembookingan lapangan oleh si user akan ditampilkan secara realtime pada halaman pembookingan admin(tanpa harus reload halaman)
 -   Perubahan status pembookingan secara realtime(tanpa harus reload halaman)
 -   Dilengkapi dengan fitur pembuatan diskon
 
-### Dibangun Dengan :
+-   ### Dibangun Dengan :
 
 -   Laravel 9
 -   Admin LTE
