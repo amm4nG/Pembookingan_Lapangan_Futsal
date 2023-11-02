@@ -34,12 +34,12 @@ Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('index');
 });
- 
+
 
 Route::resource('home', HomeController::class)->middleware(['auth']);
-Route::resource('reset', PasswordController::class)->middleware(['auth', 'verified']);
+Route::resource('reset', PasswordController::class)->middleware(['auth']);
 
-Route::group(['middleware' => ['role:user', 'verified']], function () {
+Route::group(['middleware' => ['role:user']], function () {
     Route::resource('lapangan', LapanganUserController::class);
     Route::resource('cara-booking', CaraBookingUserController::class);
     Route::resource('tentang-kami', TentangKamiUserController::class);
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['role:user', 'verified']], function () {
     Route::resource('komentar', KomentarController::class);
 });
 
-Route::group(['middleware' => ['role:admin', 'verified']], function () {
+Route::group(['middleware' => ['role:admin']], function () {
     Route::resource('pembookingan', PembookinganController::class);
     Route::resource('pengguna', PenggunaController::class);
     Route::resource('setelan', SetelanController::class);
