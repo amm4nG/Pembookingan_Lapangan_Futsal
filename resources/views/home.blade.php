@@ -59,7 +59,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ route('profil.index') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
@@ -80,8 +80,6 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
-                    <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
@@ -90,11 +88,18 @@
                             </p>
                         </a>
                     </li>
-
-                    <li class="nav-header">MENU</li>
+                    <li class="nav-header">MENU UTAMA</li>
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('pembookingan.index') }}">
+                                <i class="nav-icon far fa-calendar"></i>
+                                <p>
+                                    Pembookingan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('pengguna.index') }}">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Pengguna
@@ -102,26 +107,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="nav-icon fas fa-calendar"></i>
-                                <p>
-                                    Pemesanan
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="nav-icon fas fa-file-alt"></i>
-                                <p>
-                                    Laporan
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('setelan.index') }}">
                                 <i class="nav-icon fa fa-cog"></i>
                                 <p>
-                                    pengaturan
+                                    Setelan
                                 </p>
                             </a>
                         </li>
@@ -150,14 +139,14 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ url('profil') }}">
                                 <i class="nav-icon fa fa-user"></i>
                                 <p>
                                     Profil
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('bookingan-saya') }}">
                                 <i class="nav-icon fa fa-calendar"></i>
@@ -204,85 +193,187 @@
             <div class="container-fluid">
                 <!-- Info boxes -->
                 <div class="row">
-                    <div class="col-12 col-sm-6 col-md-6">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Disukai</span>
-                                <span class="info-box-number">1,910</span>
+                    @if (Auth::user()->role == 'admin')
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-danger elevation-1"><i
+                                        class="nav-icon far fa-calendar"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text"><b>Pembookingan</b></span>
+                                    <span class="info-box-number"></span>
+                                </div>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-
-                    <!-- fix for small devices only -->
-                    <div class="clearfix hidden-md-up"></div>
-
-                    <div class="col-12 col-sm-6 col-md-6">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Pengguna</span>
-                                <span class="info-box-number">2,000</span>
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-warning elevation-1"><i
+                                        class="nav-icon fas fa-users"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text"><b>Pengguna</b></span>
+                                    <span class="info-box-number"></span>
+                                </div>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-primary elevation-1"><i class="nav-icon fa fa-cog"></i>
+                                </span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text"><b>Setelan</b></span>
+                                    <span class="info-box-number"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Username</th>
+                                                <th>Komentar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($komentar as $komen)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $komen->username }}</td>
+                                                    <td>
+                                                        {{ $komen->komentar }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    @else
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Disukai</span>
+                                    <span class="info-box-number">200</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+
+                        <!-- fix for small devices only -->
+                        <div class="clearfix hidden-md-up"></div>
+
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Pengguna</span>
+                                    <span class="info-box-number">2,000</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                    @endif
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h5 class="card-title">Aturan Pemakaian Lapangan</h5>
-
-                                {{-- <div class="card-tools">
-                                    <button class="btn btn-tool" data-card-widget="collapse" type="button">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div> --}}
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="">
-                                            1. Menggunakan sepatu futsal atau sepatu khusus untuk bermain di lapangan
-                                            futsal. Sepatu yang digunakan harus bersih dan tidak menyebabkan gesekan atau
-                                            kerusakan pada lapangan. <br>
-                                            2. Menjaga kebersihan dan keselamatan lapangan. Pengguna harus memastikan bahwa
-                                            lapangan tidak tercemar dengan sampah atau benda yang dapat menyebabkan
-                                            kecelakaan. <br>
-                                            3. Menjaga ketertiban dan menghormati pengguna lain. Pengguna harus menghargai
-                                            hak
-                                            orang lain untuk menikmati fasilitas yang sama, tidak bertindak kasar atau
-                                            mengganggu ketenangan pengguna lain. <br>
-                                            4. Mematuhi aturan dan peraturan yang berlaku di lapangan futsal. Pengguna harus
-                                            mematuhi semua peraturan yang ditetapkan oleh pengelola lapangan, termasuk batas
-                                            waktu pemakaian dan peraturan permainan futsal. <br>
-                                            5. Membayar biaya pemakaian lapangan sesuai dengan tarif yang ditetapkan.
-                                            Pengguna harus membayar biaya pemakaian lapangan sesuai dengan jumlah waktu yang
-                                            telah dipakai, sesuai dengan ketentuan yang berlaku.
-                                        </p>
-                                    </div>
-                                    <!-- /.col -->
+                    @if (Auth::user()->role == 'admin')
+                    @else
+                        <div class="col-12">
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Aturan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    Menggunakan sepatu futsal atau sepatu khusus untuk bermain di lapangan
+                                                    futsal. Sepatu yang digunakan harus bersih dan tidak menyebabkan gesekan
+                                                    atau
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    Menjaga kebersihan dan keselamatan lapangan. Pengguna harus memastikan
+                                                    bahwa
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                    Menjaga ketertiban dan menghormati pengguna lain. Pengguna harus
+                                                    menghargai
+                                                    hak
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                    Mematuhi aturan dan peraturan yang berlaku di lapangan futsal. Pengguna
+                                                    harus
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                    Membayar biaya pemakaian lapangan sesuai dengan tarif yang ditetapkan.
+                                                    Pengguna harus membayar biaya pemakaian lapangan sesuai dengan jumlah
+                                                    waktu
+                                                    yang
+                                                    telah dipakai, sesuai dengan ketentuan yang berlaku.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <!-- /.row -->
+                                <!-- /.card-body -->
                             </div>
-                            <!-- ./card-body -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
+                    @endif
+
                 </div>
-                <!-- /.row -->
             </div>
         </section>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 @endsection

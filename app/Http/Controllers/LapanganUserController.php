@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BookingEvent;
 use App\Models\Bookingan;
-use GuzzleHttp\Psr7\Request as Psr7Request;
+use App\Models\Lapangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LapanganUserController extends Controller
-{
+{ 
+    
     public function index(Request $request)
     {
+        $lapangan = Lapangan::where('id', 1)->first();
         $bookingan = Bookingan::where('id_user', Auth::user()->id)->first();
-        return view('users.lapangan', compact(['bookingan']));
+        return view('users.lapangan', compact(['bookingan', 'lapangan']));
     }
 
     public function store(Request $request)
@@ -22,7 +25,8 @@ class LapanganUserController extends Controller
             return response()->json([
                 'status' => 'error',
             ]);
-        }
+        } 
+        event(new BookingEvent('ada bookingan baru'));
         $bookingan->tanggal_main = $request->tanggalMain;
         $bookingan->jam_main = $request->jamMain;
         $bookingan->id_user = Auth::user()->id;
@@ -59,5 +63,13 @@ class LapanganUserController extends Controller
                 'status' => 'Data Berhasil Dihapus'
             ]);
         } 
+    }
+
+    public function show($id)
+    {
+        $bookingan = Bookingan::where('id_user', $id)->first();
+        return response()->json([
+            'bookingan' => $bookingan
+        ]);
     }
 }

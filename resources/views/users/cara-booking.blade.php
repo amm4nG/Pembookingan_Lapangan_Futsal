@@ -59,7 +59,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ url('profil') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
                     <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a class="nav-link " href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
@@ -115,14 +115,14 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ url('profil') }}">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 Profil
                             </p>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('bookingan-saya') }}">
                             <i class="nav-icon fa fa-calendar"></i>
@@ -166,64 +166,80 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Aturan perentalan kamera</h3>
-                            </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="">
-                                            1. Pilih menu lapangan <br><br>
-                                            2. Setelah itu pilih tanggal main <br><br>
-                                            3. Selanjutnya pilih jam main <br><br>
-                                            4. Klik booking dan tunggu konfirmasi persetujuan dari admin <br><br>
-                                            5. Setelah admin menyetujui bookingan Anda, silahkan datang 15 menit sebelum
-                                            jadwal main yang telah dibooking, dan lakukan pembayaran.
-                                        </p>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Cara booking</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                Pilih menu lapangan
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>
+                                                Setelah itu pilih tanggal main
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>
+                                                Selanjutnya pilih jam main
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>
+                                                Klik booking dan tunggu konfirmasi persetujuan dari admin
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>
+                                                Setelah admin menyetujui bookingan Anda, silahkan datang 15 menit sebelum
+                                                jadwal main yang telah dibooking, dan lakukan pembayaran.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>
-                    {{-- <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title my-3 text-bold">Cara Booking Lapangan</h5>
-                                <div class="card-tools">
-                                    <button class="btn btn-tool" data-card-widget="collapse" type="button">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="">
-                                            1. Pilih menu lapangan <br><br>
-                                            2. Setelah itu pilih tanggal main <br><br>
-                                            3. Selanjutnya pilih jam main <br><br>
-                                            4. Klik booking dan tunggu konfirmasi persetujuan dari admin
-                                        </p>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- ./card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div> --}}
-                    <!-- /.col -->
                 </div>
                 <!-- /.row -->
             </div>
         </section>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 @endsection

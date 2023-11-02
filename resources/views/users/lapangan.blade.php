@@ -58,7 +58,7 @@
                     <img class="img-circle elevation-2" src="dist/img/avatar5.png" alt="User Image">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ url('profil') }}">{{ Auth::user()->username }}</a>
+                    <a class="d-block">{{ Auth::user()->username }}</a>
                 </div>
             </div>
 
@@ -114,14 +114,14 @@
                     </li>
                     @if (Auth::user()->role == 'admin')
                     @else
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ url('profil') }}">
                                 <i class="nav-icon fa fa-user"></i>
                                 <p>
                                     Profil
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                     @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('bookingan-saya') }}">
@@ -238,9 +238,19 @@
                                         @endif
                                     </div>
                                     <div class="bg-gray py-2 px-3">
-                                        <h2 class="mb-0">
-                                            Rp. 150,000/jam
-                                        </h2>
+
+                                        @if (optional($lapangan)->diskon == null || optional($lapangan)->diskon == '')
+                                            <h2 class="mb-0">
+                                                Rp. {{ number_format($lapangan->harga, 0, ',', '.') }}/jam
+                                            </h2>
+                                        @else
+                                            <h2 class="mb-0">
+                                                Rp.<span style="text-decoration: line-through" class="mr-2">
+                                                    {{ number_format($lapangan->harga, 0, ',', '.') }}
+                                                </span>
+                                                {{ number_format($lapangan->harga - ($lapangan->diskon / 100) * $lapangan->harga, 0, ',', '.') }}/jam
+                                            </h2>
+                                        @endif
                                     </div>
                                     <div class="mt-4">
                                         @if (optional($bookingan)->count() > 0)
@@ -282,11 +292,10 @@
         </section>
     </div>
     <!-- /.content -->
-
     <!-- modal validasi tanggal main -->
     <div class="modal" id="modal" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-white">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-exclamation-triangle text-warning"></i> Perhatian</h5>
                     <button class="close" id="x" data-dismiss="modal" type="button" aria-label="Close">
@@ -294,9 +303,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="">
-                        Minimal tanggal main satu hari dari hari ini
-                    </p>
+                    Minimal tanggal main satu hari dari hari ini
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="close" data-dismiss="modal" type="button">Oke</button>
@@ -308,7 +315,7 @@
     <!-- modal pengaturan tanggal main -->
     <div class="modal" id="modal1" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-white">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-exclamation-triangle text-warning"></i> Perhatian</h5>
                     <button class="close" id="x1" data-dismiss="modal" type="button" aria-label="Close">
@@ -316,9 +323,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        Harap atur tanggal main
-                    </p>
+                    Harap atur tanggal main
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" id="close1" data-dismiss="modal" type="button">Oke</button>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Bookingan Saya
+    Pembookingan
 @endsection
 @section('class-body')
     hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed
@@ -80,54 +80,44 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false"
                     role="menu">
-                    <!-- Add icons to the links using the .nav-icon class
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('home') }}">
+                        <a class="nav-link " href="{{ url('home') }}">
                             <i class="nav-icon fas fa-home"></i>
                             <p>
                                 Beranda
                             </p>
                         </a>
                     </li>
-                    <li class="nav-header">MENU</li>
+                    <li class="nav-header">MENU UTAMA</li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('lapangan') }}">
-                            <i class="nav-icon fa fa-futbol"></i>
+                        <a class="nav-link active" href="{{ route('pembookingan.index') }}">
+                            <i class="nav-icon far fa-calendar"></i>
                             <p>
-                                Lapangan
+                                Pembookingan
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('cara-booking') }}">
-                            <i class="nav-icon fa fa-book"></i>
+                        <a class="nav-link" href="{{ route('pengguna.index') }}">
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Cara Booking
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('tentang-kami') }}">
-                            <i class="nav-icon fa fa-question-circle"></i>
-                            <p>
-                                Tentang Kami
+                                Pengguna
                             </p>
                         </a>
                     </li>
                     {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ url('profil') }}">
-                            <i class="nav-icon fa fa-user"></i>
-                            <p>
-                                Profil
-                            </p>
-                        </a>
-                    </li> --}}
+                            <a class="nav-link" href="">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    Laporan
+                                </p>
+                            </a>
+                        </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ url('bookingan-saya') }}">
-                            <i class="nav-icon fa fa-calendar"></i>
+                        <a class="nav-link" href="{{ route('setelan.index') }}">
+                            <i class="nav-icon fa fa-cog"></i>
                             <p>
-                                Bookingan Saya
+                                Setelan
                             </p>
                         </a>
                     </li>
@@ -150,6 +140,7 @@
         </div>
         <!-- /.sidebar -->
     </aside>
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -162,6 +153,7 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
+
         <section class="content">
             <div class="container-fluid">
                 <!-- Info boxes -->
@@ -170,10 +162,11 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="table-bookingan-saya" class="table table-bordered table-striped">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Username</th>
                                             <th>Tanggal Main</th>
                                             <th>Jadwal Main</th>
                                             <th class="text-center">Status</th>
@@ -183,16 +176,26 @@
                                         @foreach ($bookingan as $booking)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    {{ $booking->username }}
+                                                </td>
                                                 <td>{{ $booking->tanggal_main }}</td>
                                                 <td>{{ $booking->jam_main }}</td>
                                                 <td align="center">
                                                     @if ($booking->status_booking == 'no')
-                                                        <span class="badge bg-warning mr-1"
-                                                            id="menunggu-persetujuan">Menunggu
-                                                            persetujuan</span>
+                                                        <span class="badge bg-warning mr-1">Menunggu Konfirmasi</span>
+                                                        <span class="badge bg-success mr-1">
+                                                            <a href="{{ route('pembookingan.show', $booking->id) }}">
+                                                                Setujui
+                                                            </a>
+                                                        </span>
+                                                        {{-- <span class="badge bg-danger"><a href=""
+                                                                data-toggle="modal"
+                                                                data-target="#tolak-{{ $booking->id }}">Tolak</a></span> --}}
                                                     @else
-                                                        <span class="badge bg-warning mr-1">Disetujui</span>
+                                                        <span class="badge bg-success mr-1">Disetujui</span>
                                                     @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -207,11 +210,37 @@
             </div>
         </section>
     </div>
+    @foreach ($bookingan as $booking)
+        <div class="modal fade" id="tolak-{{ $booking->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('pembookingan.destroy', $booking->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Yakin menolak bookingan dari {{ $booking->username }} ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Ya</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 @section('scripts')
     <script>
         $(function() {
-            $("#table-bookingan-saya").DataTable({
+            $("#example1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,

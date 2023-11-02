@@ -16,23 +16,21 @@
 
 
 -- Dumping database structure for pembookingan
-CREATE DATABASE IF NOT EXISTS `pembookingan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `pembookingan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `pembookingan`;
 
 -- Dumping structure for table pembookingan.bookingan
 CREATE TABLE IF NOT EXISTS `bookingan` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `tanggal_main` date NOT NULL,
-  `jam_main` char(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `jam_main` char(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_user` int NOT NULL,
   `id_lapangan` int NOT NULL,
-  `status_booking` char(5) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no',
+  `status_booking` char(5) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pembookingan.bookingan: ~0 rows (approximately)
-INSERT INTO `bookingan` (`id`, `tanggal_main`, `jam_main`, `id_user`, `id_lapangan`, `status_booking`) VALUES
-	(1, '2022-12-23', '09:30 - 10:30', 1, 1, 'no');
+-- Data exporting was unselected.
 
 -- Dumping structure for table pembookingan.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -47,18 +45,37 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pembookingan.failed_jobs: ~0 rows (approximately)
+-- Data exporting was unselected.
+
+-- Dumping structure for table pembookingan.komentar
+CREATE TABLE IF NOT EXISTS `komentar` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `komentar` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_user` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Data exporting was unselected.
 
 -- Dumping structure for table pembookingan.lapangan
 CREATE TABLE IF NOT EXISTS `lapangan` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `harga` double NOT NULL,
+  `diskon` int DEFAULT NULL,
+  `img1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img4` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img5` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img6` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pembookingan.lapangan: ~0 rows (approximately)
-INSERT INTO `lapangan` (`id`, `harga`) VALUES
-	(1, 150000);
+-- Data exporting was unselected.
 
 -- Dumping structure for table pembookingan.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -66,14 +83,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pembookingan.migrations: ~0 rows (approximately)
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(1, '2014_10_12_000000_create_users_table', 1),
-	(2, '2014_10_12_100000_create_password_resets_table', 1),
-	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-	(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+-- Data exporting was unselected.
 
 -- Dumping structure for table pembookingan.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
@@ -83,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pembookingan.password_resets: ~0 rows (approximately)
+-- Data exporting was unselected.
 
 -- Dumping structure for table pembookingan.personal_access_tokens
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
@@ -102,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pembookingan.personal_access_tokens: ~0 rows (approximately)
+-- Data exporting was unselected.
 
 -- Dumping structure for table pembookingan.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -112,18 +124,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_hp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pembookingan.users: ~0 rows (approximately)
-INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'arman2302', 'armanumar2302@gmail.com', NULL, '$2y$10$/bL2/Dil76BsBeZ0cExsxOZE8JWAGy2UdF7HdX2Pkro2DG9Z.a0vO', 'user', NULL, '2022-12-12 13:39:33', '2022-12-12 13:39:33'),
-	(3, 'admin123', 'admin@gmail.com', NULL, '$2y$10$gsWOOlYjffHhDa7stpRjkOlC1FY1c0ncQeIkwPesxbhWF2JT2xxU6', 'admin', NULL, '2022-12-17 13:33:18', '2022-12-17 13:33:18');
+-- Data exporting was unselected.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

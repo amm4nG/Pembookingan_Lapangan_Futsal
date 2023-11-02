@@ -18,7 +18,7 @@ class CekRoleUser
     public function handle(Request $request, Closure $next, $role)
     {
         if (!Auth::check()) { //cek apakah user telah login
-            return redirect()->route('login'); //kembalikan kehalaman login jika user belum login
+            return redirect('login'); //kembalikan kehalaman login jika user belum login
         }
         $user = Auth::user(); //ambil data user yang login
         if ($user->role == $role) { //cek role/level user
